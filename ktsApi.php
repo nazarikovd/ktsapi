@@ -320,6 +320,7 @@ class ktsApi
             break;
 			case 'e':
 				throw new Exception($text);
+			break;
         }
     }
 
