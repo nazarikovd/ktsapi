@@ -5,14 +5,26 @@ class ktsApi
     protected $api_url; // KTS backend endpoint
     public function __construct($api_url, $app_id)
     {
+		if(empty($api_url) OR empty($app_id)) {
+			$this->error('e', 'some arguments missing!!');
+		}
+		
         $this->api_url = $api_url;
         $this->app_id = $app_id;
+		
+		
     }
 
     public function request($method, $token, $params = null)
     {
+		
+		
 
         $headers[] = "Authorization: Bearer " . $token;
+
+		if(empty($token) OR empty($method)) {
+			$this->error('e', 'some arguments missing!!');
+		}
 
         switch ($method)
         {
@@ -33,6 +45,7 @@ class ktsApi
 			break;
 
             case 'complete':
+			
                 switch ($this->app_id)
                 {
 
@@ -170,6 +183,9 @@ class ktsApi
 
     public function getShopAvailibility($token, $item)
     {
+		if(empty($token) OR empty($item)) {
+			$this->error('e', 'some arguments missing!!');
+			}
         switch ($this->app_id)
         {
 
@@ -238,7 +254,11 @@ class ktsApi
     }
     public function auth($access_token)
     {
-
+		
+		if(empty($access_token)) {
+			$this->error('e', 'Access_token cant be empty!!');
+			}
+			
         $a = $this->get("https://api.vk.com/method/apps.get?access_token=" . $access_token . "&v=5.131&app_id=" . $this->app_id);
         $b = json_decode($a);
         $b = $b
@@ -298,6 +318,8 @@ class ktsApi
             case 'w':
                 trigger_error($text, E_USER_WARNING);
             break;
+			case 'e':
+				throw new Exception($text);
         }
     }
 
