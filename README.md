@@ -1,4 +1,4 @@
 # ktsapi
-php api for kts miniapps
+php library for kts miniapps api
 
 [example](example.php)
