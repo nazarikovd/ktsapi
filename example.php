@@ -18,7 +18,7 @@ echo json_encode($kts->request('getShop', $bear)); // takes Bearer and returns [
 //
 /////////////////////////////////
 
-$kts->request('complete', $bear); // use this to finish all games and take all possible points (cur support for rosatom and homo science. Beeline uppers only for one game at call)
+$kts->request('complete', $bear); // use this to finish all games and take all possible points (cur support for rosatom and homo science. Beeline uppers only for one game at call & not tested yet)
 
 // also can check something in shop
 
@@ -30,4 +30,5 @@ if($kts->getShopAvailibility($bear, 'vk_voices')) // returns true if 'vk_voices'
 {
 	echo('new voices or votes idk');
 }
-	
+
+echo json_encode($kts->request('buy', $bear, array('type'=>'vk_sticker'))); // returns response from kts with promocode or smth. array is a post data

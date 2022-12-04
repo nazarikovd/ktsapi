@@ -24,6 +24,13 @@ class ktsApi
                 $response['SHOP_RESPONSE'] = $a;
 
             break;
+			
+			
+			case 'buy':
+				$postData = $params;
+				$a = $this->get($this->api_url . "/shop/buy", $headers, $postData);
+				$response['BUY_RESPONSE'] = $a;
+			break;
 
             case 'complete':
                 switch ($this->app_id)
@@ -81,15 +88,14 @@ class ktsApi
                     case 51436679:
                         $a = $this->get($this->api_url . "/game/start", $headers, "{}");
                         $a = json_decode($a);
-
                         $game_id = $a
                             ->data->id;
                         $postData = array(
                             "id" => $game_id,
                             "victory" => "true",
-                            "coins" => 120,
+                            "coins" => $params['coins'],
                             "tutorial" => false,
-                            "sign" => $this->signBeeline(120, $uid, $game_id)
+                            "sign" => $this->signBeeline($params['coins'], $params['id'], $game_id)
                         );
 
                         $a = $this->get($this->api_url . "/game/finish", $headers, $postData);
