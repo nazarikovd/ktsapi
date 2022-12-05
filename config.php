@@ -7,6 +7,4 @@ class config
 	
     const APP_ID 	= 	51437421; //vk app id for kts endpoint
 	
-	
-	
 }

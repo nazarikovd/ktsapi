@@ -43,7 +43,12 @@ class ktsApi
 				$a = $this->get($this->api_url . "/shop/buy", $headers, $postData);
 				$response['BUY_RESPONSE'] = $a;
 			break;
-
+			
+			case 'getRating':
+				$a = $this->get($this->api_url . "/game/rating", $headers);
+				$a = json_decode($a);
+				$response['RATING_RESPONSE'] = $a;
+			break;
             case 'complete':
 			
                 switch ($this->app_id)
@@ -110,11 +115,10 @@ class ktsApi
                             "tutorial" => false,
                             "sign" => $this->signBeeline($params['coins'], $params['id'], $game_id)
                         );
-
-                        $a = $this->get($this->api_url . "/game/finish", $headers, $postData);
+						$a = $this->get($this->api_url . "/game/finish", $headers, $postData);
                         $a = json_decode($a);
-
-                        $response['GAME' . $open . '_RESPONSE'] = $a;
+						
+                        $response['GAME_RESPONSE'] = $a;
 
                     break;
 
