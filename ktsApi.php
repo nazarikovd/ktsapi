@@ -41,6 +41,7 @@ class ktsApi
 			case 'buy':
 				$postData = $params;
 				$a = $this->get($this->api_url . "/shop/buy", $headers, $postData);
+				$a = json_decode($a);
 				$response['BUY_RESPONSE'] = $a;
 			break;
 			
